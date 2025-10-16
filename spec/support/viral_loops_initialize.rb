@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "viral_loops"
+require 'viral_loops'
 
 ViralLoops.configure do |config|
   config.campaign_id = 'foo'

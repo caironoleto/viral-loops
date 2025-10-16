@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'faraday'
 require 'json'
 require 'rack/utils'
@@ -7,7 +9,7 @@ module ViralLoops
     API_VERSION = 'v3'
 
     def initialize(secret_token: ViralLoops.configuration.secret_token)
-      @connection ||= Faraday.new(url: ViralLoops.configuration.api_base) do |faraday|
+      @connection = Faraday.new(url: ViralLoops.configuration.api_base) do |faraday|
         faraday.headers['Content-Type'] = 'application/json'
         faraday.headers['apiToken'] = secret_token
         faraday.adapter Faraday.default_adapter
@@ -33,12 +35,12 @@ module ViralLoops
       case response.status
       when 200..299 then JSON.parse(response.body)
       else
-        status_symbol = Rack::Utils::SYMBOL_TO_STATUS_CODE.key(response.status)
-        default_message = Rack::Utils::HTTP_STATUS_CODES[response.status] || "API error"
+        Rack::Utils::SYMBOL_TO_STATUS_CODE.key(response.status)
+        default_message = Rack::Utils::HTTP_STATUS_CODES[response.status] || 'API error'
 
         raise ViralLoops::ApiError.new(
           body: response.body.to_s.strip.empty? ? default_message : response.body,
-          status: response.status,
+          status: response.status
         )
       end
     end

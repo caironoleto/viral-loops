@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'lib/viral_loops/version'
 
 Gem::Specification.new do |spec|
@@ -14,6 +16,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'faraday', '~> 2.14'
   spec.add_dependency 'rack', '~> 3.2'
-  spec.add_development_dependency 'rspec', '~> 3.13'
-  spec.add_development_dependency 'webmock', '~> 3.25'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 end
