@@ -10,6 +10,12 @@ module ViralLoops
 
         Models::Participant.new(referral_code: response['referralCode'], new: response['isNew'])
       end
+
+      def convert(params)
+        response = post("#{BASE_PATH}/convert", params)
+
+        Models::Participant::Convert.new(processing: response['processing'])
+      end
     end
   end
 end

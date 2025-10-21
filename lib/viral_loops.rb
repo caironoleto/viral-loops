@@ -8,6 +8,7 @@ require 'viral_loops/version'
 
 require 'viral_loops/resources/participants'
 require 'viral_loops/models/participant'
+require 'viral_loops/models/participant/convert'
 
 module ViralLoops
   class << self
